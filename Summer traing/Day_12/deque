@@ -1,0 +1,20 @@
+from collections import deque
+def count_students_unable_to_eat(students, sandwiches):
+    students_queue = deque(students)
+    sandwiches_stack = sandwiches
+    attempts = 0
+    while students_queue and attempts < len(students_queue):
+        if students_queue[0] == sandwiches_stack[0]:
+            students_queue.popleft()  
+            sandwiches_stack.pop(0)   
+            attempts = 0  
+        else:
+            students_queue.append(students_queue.popleft())
+            attempts += 1  
+    return len(students_queue)
+students1 = [1, 1, 0, 0]
+sandwiches1 = [0, 1, 0, 1]
+print(count_students_unable_to_eat(students1, sandwiches1))  
+students2 = [1, 1, 1, 0, 0, 1]
+sandwiches2 = [1, 0, 0, 0, 1, 1]
+print(count_students_unable_to_eat(students2, sandwiches2))
